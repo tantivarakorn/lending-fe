@@ -1,0 +1,27 @@
+.payment {
+  width: 100%;
+
+  div {
+    // background: #E4F2FF;
+    // border: none;
+    // border-radius: 10px;
+    // box-shadow: 0 2px 1px 0 lightgrey;
+    // padding: 10px;
+  }
+}
+
+.step-pic {
+  width: fit-content;
+  height: auto;
+  text-align: center;
+  padding: 10px;
+}
+
+.container {
+  color: #283d81;
+}
+
+input,
+select {
+  border: solid 1px rgba(19, 105, 176, 0.1);
+}

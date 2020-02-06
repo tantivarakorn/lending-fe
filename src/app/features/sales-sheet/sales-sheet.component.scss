@@ -1,0 +1,36 @@
+@import "../../../assets/scss/responsive.mixin";
+
+.control-panel {
+  z-index: 10;
+  position: absolute;
+  top: 0;
+  right: 0;
+  background: rgba(0, 0, 0, 0.7);
+  display: flex;
+
+  a {
+    color: #ffffff;
+    padding: 10px;
+  }
+}
+
+.sale-sheet {
+  margin-top: -30px;
+  width: 70vw;
+  margin-left: auto;
+  margin-right: auto;
+  background-color: #ffffff;
+  padding: 20px;
+  border-radius: 10px;
+  -webkit-box-shadow: 0 0 3px 1px #C1C1C1;
+  box-shadow: 0 0 3px 1px #C1C1C1;
+}
+
+@include phone {
+  .sale-sheet {
+    width: auto;
+    height: 60vh;
+    padding: 0;
+  }
+}
+

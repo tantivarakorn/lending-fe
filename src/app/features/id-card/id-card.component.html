@@ -1,0 +1,135 @@
+<div class="desktop-id container">
+  <div class="row d-flex justify-content-center">
+    <div class="col-2"></div>
+    <div class="col-4" *ngIf="data.data.details[4].details[0].value === 'Y'">
+      <div class="" *ngIf="!frontCapture">
+        <img [src]="IDCardF" class="img" alt="IDCardF">
+      </div>
+      <div class="" *ngIf="frontCapture">
+        <img class="img-capture" [src]="frontCapture.imageAsDataUrl"/>
+      </div>
+      <div class="text-center mt-3">
+        <button class="btn btn-primary btn-wider" (click)="toggleWebcam('front', camModal)" *ngIf="!frontCapture"
+                [ngStyle]="{'background': data.theme.btnColour, 'color': data.theme.btnFontColour}">
+          <i class="fas fa-camera mr-3"></i>
+          ถ่ายรูปหน้าบัตร</button>
+        <button class="btn btn-primary btn-wider" (click)="toggleWebcam('front', camModal)" *ngIf="frontCapture"
+                [ngStyle]="{'background': data.theme.btnColour, 'color': data.theme.btnFontColour}">
+          <i class="fas fa-camera mr-3"></i>
+          ถ่ายใหม่</button>
+      </div>
+    </div>
+
+    <div class="col-4" *ngIf="data.data.details[4].details[1].value === 'Y'">
+      <div class="" *ngIf="!backCapture">
+        <img [src]="IDCardB" class="img" alt="IDCardB">
+      </div>
+      <div class="" *ngIf="backCapture">
+        <img class="img-capture" [src]="backCapture.imageAsDataUrl"/>
+      </div>
+      <div class="text-center mt-3">
+        <button class="btn btn-primary btn-wider" (click)="toggleWebcam(null, camModal)" *ngIf="!backCapture"
+                [ngStyle]="{'background': data.theme.btnColour, 'color': data.theme.btnFontColour}">
+          <i class="fas fa-camera mr-3"></i>
+          ถ่ายรูปหลังบัตร</button>
+        <button class="btn btn-primary btn-wider" (click)="toggleWebcam(null, camModal)" *ngIf="backCapture"
+                [ngStyle]="{'background': data.theme.btnColour, 'color': data.theme.btnFontColour}">
+          <i class="fas fa-camera mr-3"></i>
+          ถ่ายใหม่</button>
+      </div>
+    </div>
+    <div class="col-2"></div>
+  </div>
+
+  <div class="text-center mt-5">
+    <h5>ข้อแนะนำ</h5>
+  </div>
+  <div class="d-flex justify-content-center mt-3">
+    <ul>
+      <li>ถ่ายในสถานที่ที่มีแสงสว่างเพียงพอ</li>
+      <li>หลีกเลี่ยงแสงสะท้อนบนบัตร</li>
+      <li>รายละเอียดในบัตรชัดเจน ไม่มีรอลขูดขีด</li>
+    </ul>
+  </div>
+
+  <div class="text-center mt-5">
+    <div>
+      <button class="btn btn-wider btn-primary mt-3 mb-5" [disabled]="!frontCapture || !backCapture" [routerLink]="['/features', 'PersonalInfo']"
+              [ngStyle]="{'background': data.theme.btnColour, 'color': data.theme.btnFontColour}"
+      >ตกลง</button>
+    </div>
+  </div>
+</div>
+
+<ng-template #camModal let-c="close" let-d="dismiss">
+  <div class="img" *ngIf="toggleCamera" style="padding: 20px;">
+    <app-camera (pictureTaken)="handleImage($event)" [width]="450" [height]="400"></app-camera>
+    <div class="focus-id-card"></div>
+  </div>
+</ng-template>
+
+<div class="mobile-id">
+
+  <div class="img" *ngIf="toggleCamera">
+    <app-camera (pictureTaken)="handleImage($event)" [width]="360" [height]="360"></app-camera>
+    <!--<div class="focus-id-card-mobile"></div>-->
+  </div>
+
+  <div *ngIf="show === 1 && !toggleCamera && data.data.details[4].details[0].value === 'Y'">
+    <div class="id-card" *ngIf="!frontCapture">
+      <img [src]="IDCardF" class="img" alt="IDCardF">
+    </div>
+    <div class="id-card" *ngIf="frontCapture">
+      <img class="img img-capture" [src]="frontCapture.imageAsDataUrl"/>
+    </div>
+    <div class="text-center mt-3">
+      <button class="btn btn-primary btn-wider" (click)="toggleWebcamMobile('front')" *ngIf="!frontCapture"
+              [ngStyle]="{'background': data.theme.btnColour, 'color': data.theme.btnFontColour}">
+        <i class="fas fa-camera mr-3"></i>
+        ถ่ายรูปหน้าบัตร</button>
+      <button class="btn btn-primary btn-wider" (click)="toggleWebcamMobile('front')" *ngIf="frontCapture"
+              [ngStyle]="{'background': data.theme.btnColour, 'color': data.theme.btnFontColour}">
+        <i class="fas fa-camera mr-3"></i>
+        ถ่ายใหม่</button>
+    </div>
+  </div>
+
+  <div *ngIf="show === 2 && !toggleCamera && data.data.details[4].details[1].value === 'Y'">
+    <div class="id-card" *ngIf="!backCapture">
+      <img [src]="IDCardB" class="img" alt="IDCardB">
+    </div>
+    <div class="id-card" *ngIf="backCapture">
+      <img class="img img-capture" [src]="backCapture.imageAsDataUrl"/>
+    </div>
+    <div class="text-center mt-3">
+      <button class="btn btn-primary btn-wider" (click)="toggleWebcamMobile()" *ngIf="!backCapture"
+              [ngStyle]="{'background': data.theme.btnColour, 'color': data.theme.btnFontColour}"
+      >ถ่ายรูปหลังบัตร</button>
+      <button class="btn btn-primary btn-wider" (click)="toggleWebcamMobile()" *ngIf="backCapture"
+              [ngStyle]="{'background': data.theme.btnColour, 'color': data.theme.btnFontColour}"
+      >ถ่ายใหม่</button>
+    </div>
+  </div>
+
+  <div class="text-center mt-5">
+    <h5>ข้อแนะนำ</h5>
+  </div>
+  <div class="d-flex justify-content-center mt-3">
+    <ul>
+      <li>ถ่ายในสถานที่ที่มีแสงสว่างเพียงพอ</li>
+      <li>หลีกเลี่ยงแสงสะท้อนบนบัตร</li>
+      <li>รายละเอียดในบัตรชัดเจน ไม่มีรอยขูดขีด</li>
+    </ul>
+  </div>
+
+  <div class="text-center mt-5">
+    <div>
+      <button class="btn btn-wider btn-primary mt-3 mb-5" *ngIf="show === 1 && data.data.details[4].details[0].value === 'Y'" (click)="showB()"
+              [ngStyle]="{'background': data.theme.btnColour, 'color': data.theme.btnFontColour}"
+              [disabled]="!frontCapture" >ตกลง</button>
+      <button class="btn btn-wider btn-primary mt-3 mb-5" *ngIf="show === 2 && data.data.details[4].details[1].value === 'Y'" [routerLink]="['/features', 'PersonalInfo']"
+              [ngStyle]="{'background': data.theme.btnColour, 'color': data.theme.btnFontColour}"
+              [disabled]="!frontCapture || !backCapture">ตกลง</button>
+    </div>
+  </div>
+</div>

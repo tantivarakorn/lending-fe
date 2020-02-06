@@ -1,0 +1,32 @@
+<div class="background-top" [ngStyle]="{'background': bgTop}" *ngIf="step !== 1">
+  <div class="nav-header row no-gutters">
+    <div class="col-sm-6 logo text-center">
+      <img [src]="logo" style="height: 60px;width: 130px" alt="Logo">
+    </div>
+
+    <div class="d-flex col-12 col-sm-6 text-center align-self-center justify-content-center" *ngIf="itemNo">
+      <div class="number-count">รายการเลขที่: {{itemNo}}</div>
+    </div>
+  </div>
+  <div class="headerText col-12 text-center">
+    {{title}}
+  </div>
+</div>
+<div class="background-bottom" [ngStyle]="{'background': bgBottom}">
+  <app-home [data]="splash" *ngIf="step === 1"></app-home>
+  <app-sales-sheet [data]="salesSheet" *ngIf="step === 2"></app-sales-sheet>
+  <app-conditions [data]="termCon" *ngIf="step === 3"></app-conditions>
+  <app-step-pic [data]="stepPage" *ngIf="step === 4"></app-step-pic>
+  <app-id-card [data]="idCard" *ngIf="step === 5"></app-id-card>
+  <app-personal-information [data]="customerInfo" *ngIf="step === 6" [custQ]="dataCust">
+  </app-personal-information>
+  <app-confirmation [data]="OTPPage" *ngIf="step === 7"></app-confirmation>
+  <app-confirmation-question [data]="questionComp" *ngIf="step === 8"></app-confirmation-question>
+  <app-consent-information [data]="consent" *ngIf="step === 9">
+  </app-consent-information>
+  <app-interest-rate [data]="interestRate" *ngIf="step === 10"></app-interest-rate>
+  <app-summary-detail [data]="sumaryDetail" *ngIf="step === 11"></app-summary-detail>
+  <app-payment-chanel *ngIf="step === 12"></app-payment-chanel>
+  <app-complete *ngIf="step === 13"></app-complete>
+</div>
+<ngx-spinner></ngx-spinner>

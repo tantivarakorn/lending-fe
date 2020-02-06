@@ -1,0 +1,26 @@
+<div class="sale-sheet">
+    <ngx-extended-pdf-viewer
+      [base64Src]="pdfSrc"
+      backgroundColor="#ffffff"
+      [useBrowserLocale]="true"
+      [height]="'90vh'"
+      (pagesLoaded)="updatePagesCount($event)"
+      (pageChange)="updateCurrentPage($event)"
+    >
+    </ngx-extended-pdf-viewer>
+</div>
+
+
+<div class="text-center mt-5">
+  <div class="d-flex align-items-end justify-content-center" *ngIf="showCheckbox">
+    <p-checkbox [(ngModel)]="isCheck" (onChange)="click($event)" [disabled]="scrollToBottom" binary="true"></p-checkbox>
+    <span class="ml-3">{{data.data.chkBoxLabel}}</span>
+  </div>
+
+  <div>
+    <button class="btn btn-wider pointer mt-3 mb-5" [routerLink]="['/features', 'Conditions']"
+            [ngStyle]="{'background': data.theme.btnColour, 'color': data.theme.btnFontColour}"
+            [disabled]="!isCheck">ยอมรับ
+    </button>
+  </div>
+</div>

@@ -1,0 +1,185 @@
+@import "~bootstrap/dist/css/bootstrap.css";
+@import "../node_modules/primeng/resources/themes/nova-light/theme.css";
+@import "../node_modules/primeng/resources/primeng.min.css";
+@import "../node_modules/primeicons/primeicons.css";
+@import "~@ng-select/ng-select/themes/default.theme.css";
+@import "assets/scss/responsive.mixin";
+@import '~ngx-owl-carousel-o/lib/styles/scss/owl.carousel';
+@import '~ngx-owl-carousel-o/lib/styles/scss/owl.theme.default';
+
+
+@font-face {
+  font-family: 'tisco-regular';
+  src: url('assets/fonts/TISCO-webfont/tisco-regular.woff');
+  font-weight: normal;
+}
+
+body {
+  font-family: 'tisco-regular', sans-serif;
+  font-size: 16px;
+  font-weight: 300;
+  letter-spacing: 0.3px;
+  line-height: 1.2;
+}
+
+body .ui-widget {
+  font-family: 'tisco-regular', sans-serif;
+  font-size: 14px;
+}
+
+.btn-primary {
+  background: rgb(32, 77, 146);
+  background: linear-gradient(107deg, #204d92 0%, #283d82 100%);
+}
+
+//.btn-secondary {
+//  background: #FF868C;
+//  color: #464883;
+//  border: none;
+//background: linear-gradient(107deg, #204d92 0%, #283d82 100%);
+//}
+
+.btn-wide {
+  padding-left: 1.5rem !important;
+  padding-right: 1.5rem !important;
+}
+
+.btn-wider {
+  padding-left: 4rem !important;
+  padding-right: 4rem !important;
+}
+
+.pointer {
+  cursor: pointer;
+}
+
+.background-top {
+  width: 100vw;
+  padding-bottom: 60px;
+  height: 25vh;
+  position: relative;
+}
+
+.background-bottom {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+.content-frame {
+  margin-top: -30px;
+  width: 70vw;
+  margin-left: auto;
+  margin-right: auto;
+  background-color: #ffffff;
+  padding: 20px;
+  border-radius: 10px;
+  -webkit-box-shadow: 0 0 3px 1px #C1C1C1;
+  box-shadow: 0 0 3px 1px #C1C1C1;
+  height: 50vw;
+  overflow-y: auto;
+}
+
+
+.splash-page {
+  width: 100vw;
+  height: 90vh;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-image: url("assets/splash-m.png");
+}
+
+.nav-header {
+  padding-top: 1rem;
+}
+
+.number-count {
+  background: white;
+  border-radius: 5px;
+  width: fit-content;
+  padding: 1rem;
+}
+
+.headerText {
+  font-size: 35px;
+  font-weight: 400;
+  color: #4F6198;
+  position: absolute;
+  bottom: 30%;
+}
+
+.custom-border {
+  outline: none;
+}
+
+.text-red {
+  color: indianred;
+}
+
+@include phone {
+  .logo {
+    display: none;
+  }
+
+  .content-frame {
+    width: 90vw;
+    height: 100vh;
+  }
+
+  .number-count {
+    font-size: 14px;
+    padding: 10px;
+  }
+
+  .headerText {
+    font-size: 30px;
+  }
+
+  body .ui-carousel .ui-carousel-content .ui-carousel-next {
+    display: none;
+  }
+
+  body .ui-carousel .ui-carousel-content .ui-carousel-prev {
+    display: none;
+  }
+
+}
+
+@include tablet-portrait {
+  .splash-page {
+    background-image: url("assets/splash-m.png");
+  }
+
+  .content-frame {
+    width: 80vw;
+    height: 60vh;
+  }
+}
+
+@include tablet-landscape {
+  .splash-page {
+    background-image: url("assets/splash-d.png");
+  }
+}
+
+@include desktop {
+  .splash-page {
+    background-image: url("assets/splash-d.png");
+  }
+}
+
+@include big-desktop {
+  .splash-page {
+    background-image: url("assets/splash-d.png");
+  }
+}
+
+.ng-invalid {
+  border-color: #c20e1a;
+}
+
+
+input {
+  color: #283d81 !important;
+}

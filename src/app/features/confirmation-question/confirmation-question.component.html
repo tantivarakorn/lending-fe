@@ -1,0 +1,71 @@
+ <div class="container">
+   <div class="content-frame step-pic">
+     ตอบคำถามเพื่อยืนยันตัวตน
+   </div>
+   <div class="row justify-content-center">
+
+     <div class="quastion" style="padding: 10px ;min-width: 300px;">
+       <div class="mt-4" *ngIf="questionData">
+         <ng-container *ngFor="let item of questionData.data; let i = index">
+           <div class="form-group">
+             <label>{{item.question_description_thai}}</label>
+             <select class="form-control" *ngIf="item.question_type === 3"  (change)="setValueItem(item, $event)">
+               <option *ngFor="let choice of item.question_choice" 
+                 [value]="choice.choice_value">
+                 {{ choice .choice_description_thai}}
+               </option>
+             </select>
+             <input *ngIf="item.question_type === 1" type="text"  placeholder="กรอกคำตอบ" (change)="setValueItem(item, $event)"
+               class="form-control">
+             <div class="ui-g payment" *ngIf="item.question_type === 2">
+               <div class="ui-g-12 mt-3">
+                 <p-radioButton name="group1" value="Option 1" label="ATM"  inputId="opt1" (change)="setValueItem(item, $event)">
+                 </p-radioButton>
+               </div>
+               <div class="ui-g-12 mt-3">
+                 <p-radioButton name="group1" value="Option 2" label="เคาน์เตอร์ธนาคาร" (change)="setValueItem(item, $event)"
+                   inputId="opt2">
+                 </p-radioButton>
+               </div>
+               <div class="ui-g-12 mt-3">
+                 <p-radioButton name="group1" value="Option 3" label="Mobile Banking" (change)="setValueItem(item, $event)"
+                   inputId="opt3">
+                 </p-radioButton>
+               </div>
+             </div>
+           </div>
+         </ng-container>
+
+       </div>
+
+       <!-- <div class="mt-4">
+         <label>วันครบกำหนดชำระค่างวด</label>
+         <input type="date" placeholder="เลือกคำตอบ" class="form-control">
+       </div> -->
+
+       <!-- <div class="mt-4">
+         <label>ช่องทางการชำระเงินล่าสุด</label>
+         <div class="ui-g payment">
+           <div class="ui-g-12 mt-3">
+             <p-radioButton name="group1" value="Option 1" label="ATM" [(ngModel)]="val1" inputId="opt1">
+             </p-radioButton>
+           </div>
+           <div class="ui-g-12 mt-3">
+             <p-radioButton name="group1" value="Option 2" label="เคาน์เตอร์ธนาคาร" [(ngModel)]="val1" inputId="opt2">
+             </p-radioButton>
+           </div>
+           <div class="ui-g-12 mt-3">
+             <p-radioButton name="group1" value="Option 3" label="Mobile Banking" [(ngModel)]="val1" inputId="opt3">
+             </p-radioButton>
+           </div>
+         </div>
+       </div> -->
+
+     </div>
+   </div>
+ </div>
+ <div class="text-center mt-5">
+   <div>
+     <button class="btn btn-wider btn-primary mt-3 mb-5" (click)="onSubmit()">ตกลง</button>
+   </div>
+ </div>

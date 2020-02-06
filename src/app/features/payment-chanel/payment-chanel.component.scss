@@ -1,0 +1,107 @@
+img {
+  width: 100%;
+  height: auto;
+}
+
+.step-pic {
+  width: fit-content;
+  height: auto;
+  text-align: center;
+  padding: 10px;
+}
+
+.content-frame {
+  margin: -20px auto;
+}
+
+.border-row {
+  border-radius: 12px;
+  border: solid 1px rgba(112, 157, 194, 0.5);
+  margin-top: 30px;
+}
+
+.active {
+  font-size: 16px;
+  font-weight: bold;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  text-align: center;
+  color: #283d81;
+  width: 90%;
+  height: 40px;
+  border-radius: 4px;
+  background-color: #8dcafc;
+}
+
+
+.container {
+  color: #283d81;
+}
+
+.text-head {
+  color: #1369b0;
+}
+
+h5 {
+  margin-bottom: 35px;
+}
+
+.form-group,
+.form-row {
+  margin-top: 50px;
+}
+
+hr {
+  border: solid 1px rgba(112, 157, 194, 0.5);
+}
+
+input,
+select {
+  border: solid 1px rgba(19, 105, 176, 0.1);
+}
+
+.text-thx {
+  font-size: 20px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  text-align: center;
+  color: #1369b0;
+}
+
+.details {
+  font-size: 14px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  text-align: center;
+  color: #709dc2;
+}
+
+.id-card {
+  width: 70%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.card {
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 50vw;
+}
+
+@media (min-width: 1200px) {
+  .container,
+  .container-sm,
+  .container-md,
+  .container-lg,
+  .container-xl {
+    max-width: 50vw;
+  }
+}

@@ -1,0 +1,62 @@
+@import "../../../assets/scss/responsive.mixin";
+
+.interest-step {
+  width: 318px;
+  height: 168px;
+  margin: -30px auto;
+  padding: 15px;
+  border-radius: 12px;
+  box-shadow: 0 2px 4px 0 rgba(40, 61, 129, 0.15);
+  background-color: #ffffff;
+}
+
+.fa-minus {
+  color: red;
+  padding: 8px;
+}
+
+.fa-plus {
+  color: #1369b0;
+  padding: 8px;
+}
+
+.rectangle-minus {
+  width: 32px;
+  height: 32px;
+  //opacity: 0.15;
+  border-radius: 16px;
+  //border: solid 2px #e25158;
+  background-color: pink;
+  text-align: center;
+}
+
+.rectangle-plus {
+  width: 32px;
+  height: 32px;
+  //opacity: 0.15;
+  border-radius: 20px;
+  //border: solid 2px #1369b0;
+  background-color: lightskyblue;
+}
+
+.f-12 {
+  font-size: 12px;
+}
+
+.f-14 {
+  font-size: 14px;
+}
+
+.card {
+  -webkit-border-radius: 8px;
+  -moz-border-radius: 8px;
+  border-radius: 8px;
+}
+
+.card-header:first-child {
+  -webkit-border-radius: 8px 8px 0 0;
+  -moz-border-radius: 8px 8px 0 0;
+  border-radius: 8px 8px 0 0;
+}
+
+

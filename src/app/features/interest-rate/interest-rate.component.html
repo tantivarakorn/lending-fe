@@ -1,0 +1,68 @@
+<div class="interest-step mb-3">
+  <div class="row no-gutters justify-content-between">
+    <div class="col-auto d-flex flex-column text-center">
+      <span class="f-12">ลด</span>
+      <a href="javascript:void(0)" class="rectangle-minus" (click)="minus()">
+        <i class="fa fa-minus"></i>
+      </a>
+    </div>
+    <div class="col-auto">
+      <h2 class="text-center mt-3 mb-4">{{val | comma}} บาท</h2>
+    </div>
+    <div class="col-auto d-flex flex-column text-center">
+      <span class="f-12">เพิ่ม</span>
+      <a href="javascript:void(0)" class="rectangle-plus" (click)="plus()">
+        <i class="fa fa-plus"></i>
+      </a>
+    </div>
+  </div>
+  <div class="mb-3">
+    <p-slider [(ngModel)]="val" [step]="limitAdjust" [min]="minimum" [max]="maximum" [style]="{'width': '290px'}">
+    </p-slider>
+  </div>
+  <div class="row no-gutters justify-content-between">
+    <div class="col-auto d-flex flex-column text-left">
+      <span class="f-14">วงเงินเริ่มต้น</span>
+      <span class="f-14">{{minimum  | comma}}</span>
+    </div>
+    <div class="col-auto d-flex flex-column text-right">
+      <span class="f-14">วงเงินสูงสุด</span>
+      <span class="f-14">{{maximum | comma}}</span>
+    </div>
+  </div>
+</div>
+
+<div class="text-center mt-5" *ngIf="items">
+  <div class="headerText2 mb-3">{{data.data.details[5].details[0].value}}</div>
+  <p-carousel [value]="items" styleClass="custom-carousel" [numVisible]="items.length" [numScroll]="1" [circular]="true"
+    [responsiveOptions]="responsiveOptions">
+    <ng-template let-item pTemplate="item">
+      <div style="padding: 20px">
+        <div class="card border-primary mb-3" style="max-width: 18rem">
+          <div class="card-header text-white bg-primary">{{packageList[0].label}}
+            {{item.factor_2_from}} {{packageList[0].unit}} </div>
+          <div class="card-body">
+            <div class="row justify-content-between no-gutters">
+              <div>{{packageList[3]?.label}}</div>
+              <div>{{packageList[5]?.label}}</div>
+            </div>
+            <div class="row justify-content-between no-gutters mb-3">
+              <div>#### {{packageList[3]?.unit}}</div>
+              <div>{{item.promotion_rate_code}} {{packageList[5]?.unit}}</div>
+            </div>
+            <div class="row justify-content-between no-gutters border-bottom pb-1 mb-1" *ngFor="let l of list">
+              <div>ปัจจัย</div>
+              <div>รายละเอียด</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </ng-template>
+  </p-carousel>
+</div>
+
+<div class="text-center mt-5">
+  <div>
+    <button class="btn btn-wider btn-primary mt-3 mb-5" [routerLink]="['/features', 'SummaryDetail']">ตกลง</button>
+  </div>
+</div>

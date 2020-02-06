@@ -1,0 +1,63 @@
+.step-pic {
+    width: fit-content;
+    height: auto;
+    text-align: center;
+    padding: 10px;
+}
+
+.border-row {
+    border-radius: 12px;
+    border: solid 1px rgba(112, 157, 194, 0.5);
+    margin-top: 30px;
+}
+
+.customer-detail-header {
+ margin: -40px auto;
+}
+
+.detail-header {
+  margin: 0 auto;
+  width: fit-content;
+  background: #f2f9ff;
+  padding: 0 5px;
+}
+
+.row {
+    padding: 30px;
+}
+
+.container {
+    color: #283d81;
+}
+
+.text-head {
+    color: #1369b0;
+}
+
+h5 {
+    margin-bottom: 25px;
+    margin-top: 25px;
+}
+
+.form-group,
+.form-row {
+    // margin-top: 50px;
+}
+
+hr {
+    border: solid 1px rgba(112, 157, 194, 0.5);
+}
+
+.danger {
+    margin-top: 5px;
+    color: #c20e1a;
+    font-size: 12px;
+}
+
+label {
+    margin-top: 1rem;
+}
+
+li {
+  margin-bottom: 10px;
+}

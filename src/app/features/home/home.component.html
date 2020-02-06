@@ -1,0 +1,19 @@
+<!--<div class="splash-page"></div>-->
+
+
+<div class="imgg splash-d">
+  <img [src]="splashD" class="img">
+</div>
+
+<div class="imgg splash-m">
+  <img [src]="splashM" class="img">
+</div>
+
+<div class="text-center" style="height: 10vh">
+  <div class="btn-start">
+    <button class="btn btn-wider pointer mt-3 mb-3"
+            [ngStyle]="{'background': data.theme.btnColour, 'color': data.theme.btnFontColour}"
+            [routerLink]="['/features', 'SalesSheet']"
+    >{{data.data.btnText}}</button>
+  </div>
+</div>

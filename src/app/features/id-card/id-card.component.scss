@@ -1,0 +1,70 @@
+@import "../../../assets/scss/responsive.mixin";
+
+.img {
+  width: 100%;
+  height: auto;
+  position: relative;
+}
+
+.img-capture {
+  width: 100%;
+  border-radius: 18px;
+  box-shadow: 7px 7px 4px 2px #d2e3f4;
+}
+
+.id-card {
+  width: 70%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.warm-test {
+  padding: 35px 20px;
+  background: green;
+  border-radius: 18px;
+  box-shadow: 7px 7px 4px 2px #d2e3f4;
+}
+
+.focus-id-card {
+  position: absolute;
+  border: 30px solid lightgray;
+  width: 450px;
+  height: 337px;
+  top: 20px;
+  left: 24px;
+  opacity: 0.4;
+}
+
+.focus-id-card-mobile {
+  position: absolute;
+  border: 25px solid lightgray;
+  width: 360px;
+  height: 270px;
+  top: 0;
+  left: 8px;
+  opacity: 0.4;
+}
+
+.desktop-id {
+  //display: flex;
+  margin: -30px auto;
+}
+
+.mobile-id {
+  display: none;
+  margin: -30px auto;
+}
+
+@include phone {
+  .desktop-id {
+    display: none;
+  }
+
+  .mobile-id {
+    display: block;
+  }
+
+  .id-card {
+    width: 90%;
+  }
+}

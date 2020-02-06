@@ -1,0 +1,26 @@
+@import "../../../assets/scss/responsive.mixin";
+
+.card {
+  margin: -30px auto;
+  max-width: 25rem;
+  background-color: transparent;
+  -webkit-border-radius: 8px;
+  -moz-border-radius: 8px;
+  border-radius: 8px;
+}
+
+.card-header:first-child {
+  -webkit-border-radius: 8px 8px 0 0;
+  -moz-border-radius: 8px 8px 0 0;
+  border-radius: 8px 8px 0 0;
+}
+
+input::placeholder {
+  text-align: right;
+}
+
+@include phone {
+  .card {
+    max-width: 18rem;
+  }
+}

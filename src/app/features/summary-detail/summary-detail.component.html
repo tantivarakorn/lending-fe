@@ -1,0 +1,62 @@
+<div class="card border-primary mb-3">
+  <div class="card-header text-white text-center bg-primary p-3">
+    <span>วงเงินสินเชื่อของท่าน</span>
+    <h2 class="m-0">30,000 บาท</h2>
+  </div>
+  <div class="card-body">
+    <div class="row justify-content-between no-gutters">
+      <div>ผ่อนชำระเดือนละ</div>
+      <div>ดอกเบี้ยแท้จริง</div>
+    </div>
+    <div class="row justify-content-between no-gutters mb-3">
+      <div>#### บาท</div>
+      <div>##% ต่อปี</div>
+    </div>
+    <div class="row justify-content-between no-gutters mb-3">
+      <div>#### บาท</div>
+      <div>##% ต่อปี</div>
+    </div>
+    <div class="row justify-content-between no-gutters mb-3">
+      <div>#### บาท</div>
+      <div>##% ต่อปี</div>
+    </div>
+    <div class="row justify-content-between no-gutters mb-3">
+      <div>#### บาท</div>
+      <div>##% ต่อปี</div>
+    </div>
+    <div class="row justify-content-between no-gutters mb-3">
+      <div>#### บาท</div>
+      <div>##% ต่อปี</div>
+    </div>
+  </div>
+</div>
+
+<div class="card border-secondary mt-4 mb-3">
+  <div class="card-body text-secondary">
+    <p class="card-title text-center">เลือกช่องทางรับใบแจ้งหนี้/ใบเสร็จรับเงิน</p>
+      <div class="row justify-content-between mb-1">
+        <p-radioButton [value]="false" label="SMS">
+        </p-radioButton>
+        <span>ส่งไปที่ 098 345 678</span>
+      </div>
+      <div class="row justify-content-between mb-1">
+        <p-radioButton [value]="true" label="Email">
+        </p-radioButton>
+        <input type="text" placeholder="tiscolender@gmail.com">
+      </div>
+      <div class="row justify-content-between mb-1">
+        <p-radioButton [value]="true" label="ไปรษณีย์">
+        </p-radioButton>
+        <span>ตามที่อยู่</span>
+      </div>
+  </div>
+</div>
+
+
+
+
+<div class="text-center mt-5">
+  <div>
+    <button class="btn btn-primary btn-wider" [routerLink]="['/features', 'PaymentChanel']">ยืนยันข้อมูลการกู้เงิน</button>
+  </div>
+</div>

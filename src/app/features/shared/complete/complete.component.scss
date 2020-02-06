@@ -1,0 +1,41 @@
+.container {
+    color: #283d81;
+}
+
+.text-thx {
+    font-size: 20px;
+    font-weight: normal;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    text-align: center;
+    color: #1369b0;
+}
+
+.details {
+    font-size: 14px;
+    font-weight: normal;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    text-align: center;
+    color: #709dc2;
+}
+
+.step-pic {
+    height: unset;
+    /* width: auto; */
+    width: 30%;
+    text-align: center;
+}
+
+.content-frame {
+    background-color: #1369b0;
+    border-radius: 50%;
+    width: 100px;
+    height: 100px;
+    font-size: 50px;
+    color: white;
+}

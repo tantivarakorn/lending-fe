@@ -1,0 +1,26 @@
+ 
+  <div class="otp-frame">
+    <h5 class="text-center">กรอกรหัส OTP 6 หลัก</h5>
+    <div class="text-center mt-5 mb-3">
+      <ng-otp-input  (onInputChange)="onOtpChange($event)"  [config]="{length:6, allowNumbersOnly: true, inputClass: 'custom-border'}"></ng-otp-input>
+    </div>
+    <h6 class="text-red text-center mb-4">รหัสไม่ถูกต้อง</h6>
+
+    <div class="text-center">
+      <h6>รหัสส่งไปที่เบอร์ XXX-XXX-4321</h6>
+      <h6>(รหัสอ้างอิง : TSCO)</h6>
+      <h6 class="mt-4 mb-4">ไม่ได้รับรหัส? <span style="border-bottom: 1px solid #4F6198">ขอรับรหัสใหม่ (10) </span> </h6>
+    </div>
+  </div>
+
+  <div class="text-center mt-5">
+    <div class="text-center">
+      <h6>หากไม่ได้รับรหัส OTP ผ่าน SMS</h6>
+      <h6>กรุณาติดต่อ Call Center เบอร์ XX-XXX-XXXX</h6>
+    </div>
+    <div>
+      <button class="btn btn-wider btn-primary mt-3 mb-5"
+              [ngStyle]="{'background': data.theme.btnColour, 'color': data.theme.btnFontColour}"
+              [routerLink]="['/features', 'Confirmation-question']">ตกลง</button>
+    </div>
+  </div>

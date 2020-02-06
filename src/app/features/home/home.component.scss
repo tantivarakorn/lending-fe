@@ -1,0 +1,59 @@
+@import "../../../assets/scss/responsive.mixin";
+
+//.background {
+//  width: 100vw;
+//  height: 90vh;
+//  background-image: url("../../../assets/.");
+//  background-size: cover;
+//  background-repeat: no-repeat;
+//  background-position: center center;
+//}
+
+.imgg {
+  height: 90vh;
+}
+
+.img {
+  width: 100%;
+  height: auto;
+}
+
+@include big-desktop {
+  .btn-start {
+    padding-top: 20px;
+  }
+}
+
+.splash-d {
+  display: block;
+}
+
+
+.splash-m {
+  display: block;
+}
+
+
+@include phone {
+  .splash-d {
+    display: none;
+  }
+}
+
+@include tablet-portrait {
+  .splash-d {
+    display: none;
+  }
+}
+
+.splash-m {
+  @include tablet-landscape {
+    display: none;
+  }
+  @include desktop {
+    display: none;
+  }
+  @include big-desktop {
+    display: none;
+  }
+}

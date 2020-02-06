@@ -1,0 +1,13 @@
+<div style="text-align:center">
+  <div>
+    <webcam [height]="height" [width]="width" [trigger]="triggerObservable" (imageCapture)="handleImage($event)" *ngIf="showWebcam"
+            [allowCameraSwitch]="allowCameraSwitch" [switchCamera]="nextWebcamObservable" [videoOptions]="videoOptions" (cameraSwitched)="cameraWasSwitched($event)"
+            (initError)="handleInitError($event)"></webcam>
+    <br/>
+    <div class="actionBtn" title="Take Picture">
+      <i class="fas fa-camera pointer-event" (click)="triggerSnapshot();"></i>
+    </div>
+    <!--<div class="actionBtn" (click)="showNextWebcam(true);" title="Switch Camera">🔁</div>-->
+  </div>
+</div>
+

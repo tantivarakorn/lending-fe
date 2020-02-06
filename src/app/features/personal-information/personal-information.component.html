@@ -1,0 +1,682 @@
+<form>
+  <div class="container">
+
+    <div class="content-frame step-pic">
+      โปรดตรวจสอบความถูกต้องของข้อมูล
+    </div>
+
+    <!--<div class="customer-detail-header text-center">-->
+    <!--<div class="detail-header">{{citizenInfo.details[0].value}}</div>-->
+    <!--</div>-->
+
+    <div class="row border-row" *ngIf="citizenInfo.value === 'Y'">
+      <div class="col-12 customer-detail-header text-center">
+        <div class="detail-header">{{citizenInfo.details[0].value}}</div>
+      </div>
+      <div class="col-lg-6" [formGroup]="flagDOPA">
+        <h5 class="text-left">{{citizenInfo.details[1].subCompLabel}}</h5>
+
+        <div class="form-group" *ngIf="identityInfo.details[0].value == 'Y'">
+          <label>เลขบัตรประชาชน</label>
+
+          <input type="number" class="form-control" formControlName="cardId" maxlength="13"
+                 name="{{identityInfo.details[0].id}}">
+          <div *ngIf="flagDOPA.controls.cardId.invalid" class="danger">
+            เลขบัตรประชาชน ไม่ถูกต้อง
+          </div>
+        </div>
+
+        <div class="form-group" *ngIf="identityInfo.details[1].value == 'Y'">
+          <label>เลขหลังบัตรประชาชน</label>
+          <input type="number" class="form-control" formControlName="laser" name="{{identityInfo.details[1].id}}">
+          <div *ngIf="flagDOPA.controls.laser.invalid" class="danger">
+            เลขหลังบัตรประชาชน ไม่ถูกต้อง
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="form-row">
+            <div class="col-lg-6 col-sm-12" *ngIf="identityInfo.details[2].value == 'Y'">
+              <label>ชื่อ</label>
+              <input type="text" class="form-control" formControlName="firstName" name="{{identityInfo.details[2].id}}"
+                     required>
+              <div *ngIf="flagDOPA.controls.firstName.invalid" class="danger">
+                กรุณากรอกชื่อ
+              </div>
+            </div>
+            <div class="col-lg-6 col-sm-12" *ngIf="identityInfo.details[3].value == 'Y'">
+              <label>นามสกุล</label>
+              <input type="text" class="form-control" formControlName="lastName" name="{{identityInfo.details[3].id}}">
+              <div *ngIf="flagDOPA.controls.lastName.invalid" class="danger">
+                กรุณากรอกนามสกุล
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="form-group" *ngIf="identityInfo.details[4].value == 'Y'">
+          <label>วัน/เดือน/ปี(พ.ศ)เกิด</label>
+          <input type="date" class="form-control" formControlName="birthDay" name="{{identityInfo.details[4].id}}">
+          <div *ngIf="flagDOPA.controls.birthDay.invalid" class="danger">
+            กรุณากรอกวัน/เดือน/ปี(พ.ศ)เกิด
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-6">
+        <h5 class="text-left">ที่อยู่ตามบัตรประชาชน</h5>
+        <div class="form-group" *ngIf="addressCustomer.details[0].value == 'Y'">
+          <label>ที่อยู่</label>
+          <input type="text" class="form-control" [(ngModel)]="cusPerAddress" name="{{addressCustomer.details[0].id}}">
+        </div>
+        <div class="form-group">
+          <div class="form-row">
+            <div class="col-lg-6 col-sm-12">
+              <label>แขวงตำบล</label>
+              <input type="text" class="form-control" [(ngModel)]="cusPerSubDistrict" name="cusPerSubDistrict"
+                     (blur)="findDistrict($event, 'Per')">
+              <!-- <ng-select [items]="customerMasterData.data.locationCode" bindLabel="subDistrict" bindValue="subDistrict"
+                [closeOnSelect]="true" placeholder="ตำบล"></ng-select> -->
+            </div>
+            <div class="col-lg-6 col-sm-12">
+              <label>เขต/อำเภอ</label>
+              <input type="text" class="form-control" [(ngModel)]="perDistrict" name="perDistrict">
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="form-row">
+            <div class="col-lg-6 col-sm-12">
+              <label>จังหวัด</label>
+              <input type="text" class="form-control" [(ngModel)]="perProvince" name="perProvince">
+            </div>
+            <div class="col-lg-6 col-sm-12">
+              <label>ไปรษณีย์</label>
+              <input type="number" class="form-control" [(ngModel)]="perPostCode" name="perPostCode">
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-6">
+        <h5 class="text-left">ที่อยู่ปัจจุบัน</h5>
+
+        <div class="form-group" *ngIf="addressCustomer.details[1].value == 'Y'">
+          <div class="d-flex align-items-end">
+            <p-checkbox [(ngModel)]="fakeDisabled" (onChange)="fakeDisable($event)" binary="true"
+                        name="fakeDisabled"></p-checkbox>
+            <span class="ml-3">ตามบัตรประชาชน</span>
+          </div>
+
+          <label>ที่อยู่</label>
+          <input *ngIf="!fakeDisabled" type="text" class="form-control" [(ngModel)]="cusCurAddress" name="{{addressCustomer.details[1].id}}">
+          <input *ngIf="fakeDisabled" type="text" class="form-control" [(ngModel)]="cusPerAddress"
+                 name="{{addressCustomer.details[0].id}}" readonly>
+        </div>
+        <div class="form-group">
+          <div class="form-row">
+            <div class="col-lg-6 col-sm-12">
+              <label>แขวงตำบล</label>
+              <input *ngIf="!fakeDisabled" type="text" class="form-control" [(ngModel)]="cusCurSubDistrict" name="cusCurSubDistrict" (blur)="findDistrict($event, 'Cur')">
+              <input *ngIf="fakeDisabled" type="text" class="form-control" [(ngModel)]="cusPerSubDistrict"
+                     name="cusPerSubDistrict" readonly>
+            </div>
+            <div class="col-lg-6 col-sm-12">
+              <label>เขต/อำเภอ</label>
+              <input *ngIf="!fakeDisabled" type="text" class="form-control" [(ngModel)]="curDistrict" name="curDistrict">
+              <input *ngIf="fakeDisabled" type="text" class="form-control" [(ngModel)]="perDistrict" name="perDistrict"
+                     readonly>
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="form-row">
+            <div class="col-lg-6 col-sm-12">
+              <label>จังหวัด</label>
+              <input *ngIf="!fakeDisabled" type="text" class="form-control" [(ngModel)]="curProvince" name="curProvince">
+              <input *ngIf="fakeDisabled" type="text" class="form-control" [(ngModel)]="perProvince" name="perProvince"
+                     readonly>
+            </div>
+            <div class="col-lg-6 col-sm-12">
+              <label>ไปรษณีย์</label>
+              <input *ngIf="!fakeDisabled" type="number" class="form-control" [(ngModel)]="curPostCode" name="curPostCode">
+              <input *ngIf="fakeDisabled" type="number" class="form-control" [(ngModel)]="perPostCode" name="perPostCode"
+                     readonly>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-6">
+        <h5 class="text-left">ข้อมูลเพิ่มเติม</h5>
+        <div class="form-group" *ngIf="otherInfo.details[0].value == 'Y'">
+          <label>อาชีพ</label>
+          <!-- <input id="typeahead-basic" type="text"  name="{{otherInfo.details[0].id}}" class="form-control" [ngbTypeahead]="occipationCode" typeaheadOptionField="occupationName" typeaheadGroupField="occupationName" /> -->
+          <ng-select [items]="occipationCode" bindLabel="occupationName" bindValue="codeOccupation"
+                     [(ngModel)]="cusOccupation" name="cusOccupation" [closeOnSelect]="true" placeholder="รับราชการ"></ng-select>
+        </div>
+
+
+        <div class="form-group" *ngIf="otherInfo.details[0].value == 'Y'">
+          <label>ประเภทธุระกิจ</label>
+          <!-- <input id="typeahead-basic" type="text"  name="{{otherInfo.details[0].id}}" class="form-control" [ngbTypeahead]="occipationCode" typeaheadOptionField="occupationName" typeaheadGroupField="occupationName" /> -->
+          <ng-select [items]="customerMasterData.data.businessTypeCode" bindLabel="businessTypeName"
+                     [(ngModel)]="cusBusinessType" name="cusBusinessType" bindValue="codeBusinessType" [closeOnSelect]="true" placeholder="รับราชการ"></ng-select>
+          <button (click)="testOcupation()"></button>
+        </div>
+
+        <div class="form-group">
+          <label>ชื่อบริษัท</label>
+          <input type="text" name="{{otherInfo.details[0].id}}" class="form-control"/>
+        </div>
+
+        <div class="form-group">
+          <label>ที่อยู่บริษัท</label>
+          <input type="text" name="{{otherInfo.details[0].id}}" class="form-control"/>
+          <!-- <ng-select [items]="customerMasterData.data.businessTypeCode" bindLabel="businessTypeName"
+            bindValue="businessTypeName" [closeOnSelect]="true"></ng-select> -->
+        </div>
+      </div>
+    </div>
+
+    <div class="row border-row">
+      <div class="form-group col-12" *ngIf="addressInfo.value =='Y'">
+        <div class="form-row">
+          <h4 class="text-head ">โปรดระุข้อมูลเกี่ยวกับบ้าน</h4>
+        </div>
+      </div>
+      <div class="col-lg-6" *ngIf="addressInfo.value =='Y'">
+        <h5 class="text-left">{{addressInfo.details[1].subCompLabel}}</h5>
+
+        <div class="form-group" *ngIf="homeDetail.details[0].value == 'Y'">
+          <label>เลขรหัสประจำบ้าน</label>
+          <input type="text" class="form-control" name="{{homeDetail.details[0].id}}">
+        </div>
+
+        <div class="form-group" *ngIf="homeDetail.details[1].value == 'Y'">
+          <label>ที่อยู่</label>
+          <input type="text" class="form-control" name="{{homeDetail.details[1].id}}">
+        </div>
+        <div class="form-group">
+          <div class="form-row">
+            <div class="col-lg-6 col-sm-12" *ngIf="homeDetail.details[2].value == 'Y'">
+              <label>แขวง/ตำบล</label>
+              <input type="text" class="form-control" name="{{homeDetail.details[2].id}}">
+            </div>
+            <div class="col-lg-6 col-sm-12" *ngIf="homeDetail.details[3].value == 'Y'">
+              <label>เขต/อำเภอ</label>
+              <input type="text" class="form-control" name="{{homeDetail.details[3].id}}">
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="form-row">
+            <div class="col-lg-6 col-sm-12" *ngIf="homeDetail.details[4].value == 'Y'">
+              <label>จังหวัด</label>
+              <input type="text" class="form-control" name="{{homeDetail.details[4].id}}">
+            </div>
+            <div class="col-lg-6 col-sm-12">
+              <label>รหัสไปรษณีย์</label>
+              <input type="text" class="form-control">
+            </div>
+          </div>
+        </div>
+        <div class="form-group" *ngIf="homeDetail.details[5].value == 'Y'">
+          <label>ประเภทบ้าน</label>
+          <input type="text" class="form-control" name="{{homeDetail.details[5].id}}">
+        </div>
+      </div>
+
+      <div class="col-lg-6" *ngIf="addressInfo.value =='Y'">
+        <h5 class="text-left">{{addressInfo.details[2].subCompLabel}}</h5>
+        <div class="form-group">
+          <div class="form-row">
+            <div class="col-lg-4 col-sm-12">
+              <label>คำนำหน้านาม</label>
+              <ng-select [items]="customerMasterData.data.titleCode" bindLabel="titleName" bindValue="codeTitle"
+                         [closeOnSelect]="true" placeholder="รับราชการ"></ng-select>
+            </div>
+            <div class="col-lg-4 col-sm-12" *ngIf="personInHouseInfo.details[0].value == 'Y'">
+              <label>ชื่อ</label>
+              <input type="text" class="form-control" name="{{personInHouseInfo.details[0].id}}">
+            </div>
+            <div class="col-lg-4 col-sm-12" *ngIf="personInHouseInfo.details[1].value == 'Y'">
+              <label>นามสกุล</label>
+              <input type="text" class="form-control" name="{{personInHouseInfo.details[1].id}}">
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="form-row">
+            <div class="col-lg-6 col-sm-12" *ngIf="personInHouseInfo.details[2].value == 'Y'">
+              <label>สัญชาติ</label>
+              <select type="text" class="form-control" name="{{personInHouseInfo.details[2].id}}"></select>
+            </div>
+            <div class="col-lg-6 col-sm-12" *ngIf="personInHouseInfo.details[3].value == 'Y'">
+              <label>เพศ</label>
+              <!-- <select type="text" class="form-control" name="{{personInHouseInfo.details[3].id}}"></select> -->
+              <ng-select [items]="customerMasterData.data.genderCode" bindLabel="genderName" bindValue="codeGender"
+                         [closeOnSelect]="true" placeholder="รับราชการ"></ng-select>
+            </div>
+
+          </div>
+          <div class="form-group" *ngIf="personInHouseInfo.details[4].value == 'Y'">
+            <label>เลขบัตรประชาชน</label>
+            <input type="text" class="form-control" name="{{personInHouseInfo.details[4].id}}">
+          </div>
+          <div class="form-row">
+            <div class="col-lg-6 col-sm-12" *ngIf="personInHouseInfo.details[5].value == 'Y'">
+              <label>สถานภาพ</label>
+              <select type="text" class="form-control" name="{{personInHouseInfo.details[5].id}}"></select>
+            </div>
+            <div class="col-lg-6 col-sm-12" *ngIf="personInHouseInfo.details[6].value == 'Y'">
+              <label>วันเกิด</label>
+              <select type="text" class="form-control" name="{{personInHouseInfo.details[6].id}}"></select>
+            </div>
+
+          </div>
+          <div class="form-group" *ngIf="personInHouseInfo.details[7].value == 'Y'">
+            <label>ชื่อบิดา</label>
+            <input type="text" class="form-control" name="{{personInHouseInfo.details[7].id}}">
+          </div>
+          <div class="form-row">
+            <div class="col-lg-6 col-sm-12" *ngIf="personInHouseInfo.details[8].value == 'Y'">
+              <label>เลขบัตรประชาชนของบิดา</label>
+              <select type="text" class="form-control" name="{{personInHouseInfo.details[8].id}}"></select>
+            </div>
+            <div class="col-lg-6 col-sm-12" *ngIf="personInHouseInfo.details[9].value == 'Y'">
+              <label>สัญชาติของบิดา</label>
+              <select type="text" class="form-control" name="{{personInHouseInfo.details[9].id}}"></select>
+            </div>
+
+          </div>
+          <div class="form-group" *ngIf="personInHouseInfo.details[10].value == 'Y'">
+            <label>ชื่อมารดา</label>
+            <input type="text" class="form-control" name="{{personInHouseInfo.details[10].id}}">
+          </div>
+          <div class="form-row">
+            <div class="col-lg-6 col-sm-12" *ngIf="personInHouseInfo.details[11].value == 'Y'">
+              <label>เลขบัตรประชาชนของมารดา</label>
+              <select type="text" class="form-control" name="{{personInHouseInfo.details[11].id}}"></select>
+            </div>
+            <div class="col-lg-6 col-sm-12" *ngIf="personInHouseInfo.details[12].value == 'Y'">
+              <label>สัญชาติของมารดา</label>
+              <select type="text" class="form-control" name="{{personInHouseInfo.details[12].id}}"></select>
+            </div>
+
+          </div>
+        </div>
+      </div>
+      <hr>
+      <div class="form-group col-12" *ngIf="vehicleInfo.value == 'Y'">
+        <div class="form-row">
+          <h4 class="text-head ">โปรดระุข้อมูลเกี่ยวกับรถ</h4>
+        </div>
+      </div>
+      <div class="col-lg-6" *ngIf="vehicleInfo.value == 'Y'">
+        <h5 class="text-left">{{vehicleInfo.details[1].subCompLabel}}</h5>
+
+        <div class="form-row">
+          <div class="col-lg-6 col-sm-12" *ngIf="vehicleRegis.details[1].value == 'Y'">
+            <label>เลขทะเบียนรถ</label>
+            <input type="text" class="form-control" name="{{vehicleRegis.details[1].id}}">
+          </div>
+          <div class="col-lg-6 col-sm-12" *ngIf="vehicleRegis.details[2].value == 'Y'">
+            <label>จังหวัดจดทะเบียน</label>
+            <input type="text" class="form-control" name="{{vehicleRegis.details[2].id}}">
+          </div>
+
+        </div>
+        <div class="form-row">
+          <div class="col-lg-6 col-sm-12" *ngIf="vehicleRegis.details[0].value == 'Y'">
+            <label>วันจดทะเบียน</label>
+            <select type="text" class="form-control" name="{{vehicleRegis.details[0].id}}"></select>
+          </div>
+          <div class="col-lg-6 col-sm-12" *ngIf="vehicleRegis.details[3].value == 'Y'">
+            <label>ประเภท</label>
+            <select type="text" class="form-control" name="{{vehicleRegis.details[3].id}}"></select>
+          </div>
+
+        </div>
+        <div class="form-row">
+          <div class="col-lg-6 col-sm-12" *ngIf="vehicleRegis.details[4].value == 'Y'">
+            <label>รย.</label>
+            <select type="text" class="form-control" name="{{vehicleRegis.details[4].id}}"></select>
+          </div>
+          <div class="col-lg-6 col-sm-12" *ngIf="vehicleRegis.details[5].value == 'Y'">
+            <label>ลักษณะ</label>
+            <select type="text" class="form-control" name="{{vehicleRegis.details[5].id}}"></select>
+          </div>
+
+        </div>
+        <div class="form-row">
+          <div class="col-lg-6 col-sm-12" *ngIf="vehicleRegis.details[6].value == 'Y'">
+            <label>ยี่ห้อเครื่องยนต์</label>
+            <select type="text" class="form-control" name="{{vehicleRegis.details[6].id}}"></select>
+          </div>
+          <div class="col-lg-6 col-sm-12" *ngIf="vehicleRegis.details[7].value == 'Y'">
+            <label>แบบ</label>
+            <select type="text" class="form-control" name="{{vehicleRegis.details[7].id}}"></select>
+          </div>
+
+        </div>
+        <div class="form-row">
+          <div class="col-lg-6 col-sm-12" *ngIf="vehicleRegis.details[8].value == 'Y'">
+            <label>รุ่นปี</label>
+            <select type="text" class="form-control" name="{{vehicleRegis.details[8].id}}"></select>
+          </div>
+          <div class="col-lg-6 col-sm-12" *ngIf="vehicleRegis.details[9].value == 'Y'">
+            <label>สี</label>
+            <select type="text" class="form-control" name="{{vehicleRegis.details[9].id}}"></select>
+          </div>
+
+        </div>
+        <div class="form-row">
+          <div class="col-lg-6 col-sm-12" *ngIf="vehicleRegis.details[10].value == 'Y'">
+            <label>เลขตัวรถ</label>
+            <select type="text" class="form-control" name="{{vehicleRegis.details[10].id}}"></select>
+          </div>
+          <div class="col-lg-6 col-sm-12" *ngIf="vehicleRegis.details[11].value == 'Y'">
+            <label>อยู่ที่</label>
+            <select type="text" class="form-control" name="{{vehicleRegis.details[11].id}}"></select>
+          </div>
+
+        </div>
+        <div class="form-row">
+          <div class="col-lg-6 col-sm-12" *ngIf="vehicleRegis.details[12].value == 'Y'">
+            <label>เลขเครื่องยนต์</label>
+            <select type="text" class="form-control" name="{{vehicleRegis.details[12].id}}"></select>
+          </div>
+          <div class="col-lg-6 col-sm-12" *ngIf="vehicleRegis.details[13].value == 'Y'">
+            <label>อยู่ที่</label>
+            <select type="text" class="form-control" name="{{vehicleRegis.details[13].id}}"></select>
+          </div>
+
+        </div>
+        <div class="form-row">
+          <div class="col-lg-6 col-sm-12" *ngIf="vehicleRegis.details[14].value == 'Y'">
+            <label>เชื้อเพลิง</label>
+            <select type="text" class="form-control" name="{{vehicleRegis.details[14].id}}"></select>
+          </div>
+          <div class="col-lg-6 col-sm-12" *ngIf="vehicleRegis.details[15].value == 'Y'">
+            <label>เลขถังแก๊ส</label>
+            <select type="text" class="form-control" name="{{vehicleRegis.details[15].id}}"></select>
+          </div>
+
+        </div>
+        <div class="form-row">
+          <div class="col-lg-6 col-sm-12" *ngIf="vehicleRegis.details[16].value == 'Y'">
+            <label>จำนวนลูกสูบ</label>
+            <select type="text" class="form-control" name="{{vehicleRegis.details[16].id}}"></select>
+          </div>
+          <div class="col-lg-6 col-sm-12" *ngIf="vehicleRegis.details[17].value == 'Y'">
+            <label>จำนวนซีซี</label>
+            <select type="text" class="form-control" name="{{vehicleRegis.details[17].id}}"></select>
+          </div>
+
+        </div>
+        <div class="form-row">
+          <div class="col-lg-6 col-sm-12" *ngIf="vehicleRegis.details[18].value == 'Y'">
+            <label>แรงม้า</label>
+            <select type="text" class="form-control" name="{{vehicleRegis.details[18].id}}"></select>
+          </div>
+          <div class="col-lg-6 col-sm-12" *ngIf="vehicleRegis.details[19].value == 'Y'">
+            <label>เพลา</label>
+            <select type="text" class="form-control" name="{{vehicleRegis.details[19].id}}"></select>
+          </div>
+
+        </div>
+        <div class="form-row">
+          <div class="col-lg-6 col-sm-12" *ngIf="vehicleRegis.details[20].value == 'Y'">
+            <label>จำนวนยาง</label>
+            <select type="text" class="form-control" name="{{vehicleRegis.details[20].id}}"></select>
+          </div>
+          <div class="col-lg-6 col-sm-12" *ngIf="vehicleRegis.details[21].value == 'Y'">
+            <label>น้ำหนักรถ</label>
+            <select type="text" class="form-control" name="{{vehicleRegis.details[21].id}}"></select>
+          </div>
+
+        </div>
+        <div class="form-row">
+          <div class="col-lg-6 col-sm-12" *ngIf="vehicleRegis.details[22].value == 'Y'">
+            <label>น้ำหนักรถบรรทุก</label>
+            <select type="text" class="form-control" name="{{vehicleRegis.details[22].id}}"></select>
+          </div>
+          <div class="col-lg-6 col-sm-12" *ngIf="vehicleRegis.details[23].value == 'Y'">
+            <label>น้ำหนักรวม</label>
+            <select type="text" class="form-control" name="{{vehicleRegis.details[23].id}}"></select>
+          </div>
+
+        </div>
+        <div class="form-row">
+          <div class="col-lg-6 col-sm-12" *ngIf="vehicleRegis.details[24].value == 'Y'">
+            <label>ที่นั่ง</label>
+            <select type="text" class="form-control" name="{{vehicleRegis.details[24].id}}"></select>
+          </div>
+
+        </div>
+      </div>
+      <div class="col-lg-6" *ngIf="vehicleInfo.value == 'Y'">
+        <h5 class="text-left">{{vehicleInfo.details[2].subCompLabel}}</h5>
+
+        <div class="form-row" *ngIf="vehicleowner.details[0].value == 'Y'">
+          <label>วันที่ครอบครองรถ</label>
+          <select type="text" class="form-control" name="{{vehicleowner.details[0].id}}"></select>
+        </div>
+        <div class="form-row" *ngIf="vehicleowner.details[1].value == 'Y'">
+          <label>ผู้ถือกรรมสิทธิ์</label>
+          <input type="text" class="form-control" name="{{vehicleowner.details[1].id}}">
+        </div>
+        <div class="form-row" *ngIf="vehicleowner.details[2].value == 'Y'">
+          <label>เลขบัตรประชาชน</label>
+          <input type="text" class="form-control" name="{{vehicleowner.details[2].id}}">
+        </div>
+        <div class="form-row">
+          <div class="col-lg-6 col-sm-12" *ngIf="vehicleowner.details[3].value == 'Y'">
+            <label>วันเกิด</label>
+            <select type="text" class="form-control" name="{{vehicleowner.details[3].id}}"></select>
+          </div>
+          <div class="col-lg-6 col-sm-12" *ngIf="vehicleowner.details[4].value == 'Y'">
+            <label>สัญชาติ</label>
+            <select type="text" class="form-control" name="{{vehicleowner.details[4].id}}"></select>
+          </div>
+        </div>
+        <div class="form-row" *ngIf="vehicleowner.details[5].value == 'Y'">
+          <label>ที่อยู่</label>
+          <input type="text" class="form-control" name="{{vehicleowner.details[5].id}}">
+        </div>
+        <div class="form-row">
+          <div class="col-lg-6 col-sm-12" *ngIf="vehicleowner.details[8].value == 'Y'">
+            <label>จังหวัด</label>
+            <select type="text" class="form-control" name="{{vehicleowner.details[8].id}}"></select>
+          </div>
+          <div class="col-lg-6 col-sm-12">
+            <label>รหัสไปรษณีย์</label>
+            <select type="text" class="form-control"></select>
+          </div>
+
+        </div>
+        <div class="form-row" *ngIf="vehicleowner.details[9].value == 'Y'">
+          <label>ผู้ถือครอบครองรถ</label>
+          <input type="text" class="form-control" name="{{vehicleowner.details[9].id}}">
+        </div>
+        <div class="form-row" *ngIf="vehicleowner.details[10].value == 'Y'">
+          <label>เลขบัตรประชาชน</label>
+          <input type="text" class="form-control" name="{{vehicleowner.details[10].id}}">
+        </div>
+
+        <div class="form-row">
+          <div class="col-lg-6 col-sm-12" *ngIf="vehicleowner.details[11].value == 'Y'">
+            <label>วันเกิด</label>
+            <select type="text" class="form-control" name="{{vehicleowner.details[11].id}}"></select>
+          </div>
+          <div class="col-lg-6 col-sm-12" *ngIf="vehicleowner.details[12].value == 'Y'">
+            <label>สัญชาติ</label>
+            <select type="text" class="form-control" name="{{vehicleowner.details[12].id}}"></select>
+          </div>
+
+        </div>
+      </div>
+      <hr>
+
+      <div class="form-group col-12" *ngIf="incomeInfo.value == 'Y'">
+        <div class="form-row">
+          <h4 class="text-head ">โปรดระบุข้อมูลเกี่ยวกับรายได้</h4>
+        </div>
+      </div>
+      <div class="col-lg-6" *ngIf="incomeInfo.value == 'Y'">
+        <!--<h5 class="text-left">{{incomeInfo.details[1].subCompLabel}}</h5>-->
+        <div class="form-row">
+          <label>{{incomeInfo.details[1].details[1].details[0].label}}</label>
+          <input type="number" placeholder="ระบุรายได้" [(ngModel)]="income1" class="form-control"
+                 name="incomeInfo.details[1].details[1].details[0].label">
+        </div>
+        <div class="form-row">
+          <div class="col-lg-6 col-sm-12">
+            <label>{{incomeInfo.details[1].details[1].details[1].label}}</label>
+            <input type="number" placeholder="ระบุรายได้" [(ngModel)]="income2" class="form-control"
+                   name="incomeInfo.details[1].details[1].details[1].label">
+          </div>
+          <div class="col-lg-6 col-sm-12">
+            <label>{{incomeInfo.details[1].details[1].details[2].label}}</label>
+            <input type="number" placeholder="ระบุรายได้" [(ngModel)]="income3" class="form-control"
+                   name="incomeInfo.details[1].details[1].details[2].label">
+          </div>
+
+        </div>
+        <div class="form-row">
+          <label>{{incomeInfo.details[1].details[1].details[3].label}}</label>
+          <input type="number" placeholder="ระบุรายได้" [(ngModel)]="income4" class="form-control"
+                 name="incomeInfo.details[1].details[1].details[3].label">
+        </div>
+        <div class="form-row">
+          <label>{{incomeInfo.details[1].details[1].details[4].label}}</label>
+          <input type="number" placeholder="ระบุรายได้" [(ngModel)]="income5" class="form-control"
+                 name="incomeInfo.details[1].details[1].details[4].label">
+        </div>
+      </div>
+      <div class="col-lg-6" *ngIf="incomeInfo.value == 'Y'">
+        <!--<h5 class="text-left">{{incomeInfo.details[2].subCompLabel}}</h5>-->
+        <div class="form-row">
+          <label>{{incomeInfo.details[2].details[1].details[0].label}}</label>
+          <input type="number" placeholder="ระบุค่าใช้จ่าย" [(ngModel)]="expend1" class="form-control"
+                 name="incomeInfo.details[2].details[1].details[0].label">
+        </div>
+        <div class="form-row">
+          <div class="col-lg-6 col-sm-12">
+            <label>{{incomeInfo.details[2].details[1].details[1].label}}</label>
+            <input type="number" placeholder="ระบุค่าใช้จ่าย" [(ngModel)]="expend2" class="form-control"
+                   name="incomeInfo.details[2].details[1].details[1].label">
+          </div>
+          <div class="col-lg-6 col-sm-12">
+            <label>{{incomeInfo.details[2].details[1].details[2].label}}</label>
+            <input type="number" placeholder="ระบุค่าใช้จ่าย" [(ngModel)]="expend3" class="form-control"
+                   name="incomeInfo.details[2].details[1].details[2].label">
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="col-lg-6 col-sm-12">
+            <label>{{incomeInfo.details[2].details[1].details[3].label}}</label>
+            <input type="number" placeholder="ระบุค่าใช้จ่าย" [(ngModel)]="expend4" class="form-control"
+                   name="incomeInfo.details[2].details[1].details[3].label">
+          </div>
+          <div class="col-lg-6 col-sm-12">
+            <label>{{incomeInfo.details[2].details[1].details[4].label}}</label>
+            <input type="number" placeholder="ระบุค่าใช้จ่าย" [(ngModel)]="expend5" class="form-control"
+                   name="incomeInfo.details[2].details[1].details[4].label">
+          </div>
+        </div>
+        <div class="form-row">
+          <label>{{incomeInfo.details[2].details[3].details[0].label}}</label>
+          <input type="number" placeholder="ระบุภาระหนี้สิน" [(ngModel)]="expend6" class="form-control"
+                 name="incomeInfo.details[2].details[3].details[0].label">
+        </div>
+        <div class="form-row">
+          <div class="col-lg-6 col-sm-12">
+            <label>{{incomeInfo.details[2].details[3].details[1].label}}</label>
+            <input type="number" placeholder="ระบุภาระหนี้สิน" [(ngModel)]="expend7" class="form-control"
+                   name="incomeInfo.details[2].details[3].details[1].label">
+          </div>
+          <div class="col-lg-6 col-sm-12">
+            <label>{{incomeInfo.details[2].details[3].details[2].label}}</label>
+            <input type="number" placeholder="ระบุภาระหนี้สิน" [(ngModel)]="expend8" class="form-control"
+                   name="incomeInfo.details[2].details[3].details[2].label">
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="col-lg-6 col-sm-12">
+            <label>{{incomeInfo.details[2].details[3].details[3].label}}</label>
+            <input type="number" placeholder="ระบุภาระหนี้สิน" [(ngModel)]="expend9" class="form-control"
+                   name="incomeInfo.details[2].details[3].details[3].label">
+          </div>
+          <div class="col-lg-6 col-sm-12">
+            <label>{{incomeInfo.details[2].details[3].details[4].label}}</label>
+            <input type="number" placeholder="ระบุภาระหนี้สิน" [(ngModel)]="expend10" class="form-control"
+                   name="incomeInfo.details[2].details[3].details[4].label">
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--<div class="row border-row justify-content-center">-->
+    <!--<div class="mt-4" *ngIf="otheKYC.value == 'Y'">-->
+    <!--<p>ท่านมีถิ่นที่อยู่/ประกอบอาชีพ/มีสถานประกอบการ/มีแหล่งเงินได้ หรืออย่างใดอย่างหนึ่ง</p>-->
+    <!--<p for="">อยู่ในต่างประเทศหรือในพื้นที่ชายแดนของประเทศไทยหรือไม่?</p>-->
+    <!--<div class="ui-g payment text-center">-->
+    <!--<div class="ui-g-12 mt-3">-->
+    <!--<p-radioButton name="{{redio.id}}" [value]="false" label="ไม่ใช่, ข้าพเจ้าไม่ได้อยู่ในพื้นที่"-->
+    <!--*ngIf="redio.value" inputId="opt2">-->
+    <!--</p-radioButton>-->
+    <!--</div>-->
+    <!--<div class="ui-g-12 mt-3">-->
+    <!--<p-radioButton name="{{redio.id}}" [value]="true" label="ใช่, ข้าพเจ้าอยู่ในพื้นที่" *ngIf="redio.value"-->
+    <!--inputId="opt3">-->
+    <!--</p-radioButton>-->
+    <!--</div>-->
+    <!--</div>-->
+    <!--</div>-->
+    <!--</div>-->
+  </div>
+</form>
+
+<!--</form>-->
+
+
+<div class="text-center mt-5">
+  <div>
+    <button class="btn btn-wider btn-primary mt-3 mb-5"
+            [ngStyle]="{'background': data.theme.btnColour, 'color': data.theme.btnFontColour}"
+            (click)="checkEKYC()">ตกลง
+    </button>
+    <!--<button class="btn btn-wider btn-primary" (click)="open(ekyc)">test modal</button>-->
+    <button class="btn btn-wider btn-primary" (click)="sumIncomeExpend()">sum</button>
+  </div>
+</div>
+
+<ng-template #ekyc let-modal let-c="close" let-d="dismiss">
+  <div style="padding: 10px;">
+    <div class="p-3 border-row mt-0 text-center">
+      <!--<div *ngIf="otheKYC.value == 'Y'">-->
+      <span>
+         ท่านมีถิ่นที่อยู่/ประกอบอาชีพ/มีสถานประกอบการ/มีแหล่งเงินได้ หรืออย่างใดอย่างหนึ่ง
+         อยู่ในต่างประเทศหรือในพื้นที่ชายแดนของประเทศไทยหรือไม่?
+       </span>
+      <div class="d-flex justify-content-center mt-4">
+        <ul class="text-left" style="list-style: none">
+          <li>
+            <p-radioButton name="{{redio.id}}" [value]="false" label="ไม่ใช่, ข้าพเจ้าไม่ได้อยู่ในพื้นที่"
+                           *ngIf="redio.value" inputId="opt2">
+            </p-radioButton>
+          </li>
+          <li>
+            <p-radioButton name="{{redio.id}}" [value]="true" label="ใช่, ข้าพเจ้าอยู่ในพื้นที่"
+                           *ngIf="redio.value" inputId="opt3">
+            </p-radioButton>
+          </li>
+        </ul>
+      </div>
+      <!--</div>-->
+      <div class="text-center">
+        <button class="btn btn-wider"
+                [ngStyle]="{'background': data.theme.btnColour, 'color': data.theme.btnFontColour}"
+                (click)="qqqq()">ตกลง
+        </button>
+      </div>
+    </div>
+  </div>
+</ng-template>

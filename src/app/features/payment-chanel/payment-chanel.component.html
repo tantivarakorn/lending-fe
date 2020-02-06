@@ -1,0 +1,78 @@
+<div class="container">
+
+  <div class="content-frame step-pic mb-3">
+    บัญชีธนาคาร
+    <!-- <div class="row">
+      <div class="col-6 active"><span>บัญชีธนาคาร</span></div>
+      <div class="col-6"><span>พร้อมเพย์</span></div>
+    </div> -->
+  </div>
+
+  <div class="container">
+    <div class="row border-row  justify-content-center">
+      <div class="col-12 text-center">
+        <label for="" style="  color: #1369b0;font-weight: bold;margin-top:20px">เลือกธนาคารสำหรับรับเงิน</label>
+      </div>
+      <p-carousel [value]="cars" styleClass="custom-carousel" [numVisible]="1" [numScroll]="1" [circular]="true"
+        [responsiveOptions]="responsiveOptions">
+        <ng-template let-car pTemplate="item">
+          <div style="padding: 20px">
+            <div class="row" *ngFor="let item of list">
+              <div class="col-3">
+                <img src="../../../assets/tiscologo.png" alt="">
+                <div class="text-center">
+
+                </div>
+              </div>
+              <div class="col-3">
+                <img src="../../../assets/tiscologo.png" alt="">
+              </div>
+              <div class="col-3">
+                <img src="../../../assets/tiscologo.png" alt="">
+              </div>
+              <div class="col-3">
+                <img src="../../../assets/tiscologo.png" alt="">
+              </div>
+            </div>
+          </div>
+        </ng-template>
+      </p-carousel>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="row border-row  justify-content-center">
+      <div class="mt-4 text-left text-thx">
+        <div class="id-card justify-content-center">
+          <div class="form-group">
+            <label for="">หมายเลขบัญชี</label>
+            <input type="text" class="form-control">
+          </div>
+          <p>รูปหน้าสมุดบัญชี</p>
+          <img [src]="IDCardF" alt="IDCardF">
+        </div>
+        <div class="text-center mt-3">
+          <!--<button class="btn btn-primary btn-wider" (click)="toggleWebcam()">ถ่ายรูปหน้าสมุดบัญชี</button>-->
+          <!--<button class="btn btn-primary btn-wider" (click)="toggleWebcam(camModal)">ถ่ายรูปหน้าสมุดบัญชี</button>-->
+        </div>
+
+        <div class="mt-4 text-center text-thx">
+          <p>ข้อคำแนะนำ</p>
+        </div>
+        <div class="mt-4 text-center details">
+          <p>ถ่ายในที่แสงสว่างมากเพียงพอ</p>
+          <p>หลีกเลี่ยงแสงท้อนบนบัตร</p>
+          <p>รายละเอียดบนบัตรชัดเจน </p>
+        </div>
+      </div>
+    </div>
+    <div class="mt-4 text-center text-thx">
+      <p>หมายเหตุตัวอย่าง หมายเหตุตัวอย่าง หมายเหตุตัวอย่าง</p>
+    </div>
+    <div class="text-center mt-5">
+      <div>
+        <button class="btn btn-wider btn-primary mt-3 mb-5" [routerLink]="['/features', 'Complete']">ยืนยันการกู้
+        </button>
+      </div>
+    </div>
+  </div>

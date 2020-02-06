@@ -1,0 +1,23 @@
+  <div class="content-frame" (scroll)="onScroll($event)" style="height: 420px; overflow-y: scroll">
+    <div *ngIf="data.template.termsNCondition" [innerHTML]="data.template.termsNCondition" style="margin-bottom: 100px;"></div>
+    <div [innerHTML]="data.data.termsNCondition"></div>
+  </div>
+
+  <div class="text-center mt-5">
+    <div class="d-flex align-items-end justify-content-center mb-3" *ngIf="showCheckboxTemplate">
+      <p-checkbox [(ngModel)]="templateCheck" (onChange)="click($event, 'template')" [disabled]="scrollToBottom" binary="true"></p-checkbox>
+      <span class="ml-3">{{data.template.chkBoxLabel}}</span>
+    </div>
+    <div class="d-flex align-items-end justify-content-center" *ngIf="showCheckbox">
+      <p-checkbox [(ngModel)]="conCheck" (onChange)="click($event, 'con')" [disabled]="scrollToBottom" binary="true"></p-checkbox>
+      <span class="ml-3">{{data.data.chkBoxLabel}}</span>
+    </div>
+
+
+    <div>
+      <button class="btn btn-wider pointer mt-3 mb-5"
+              [ngStyle]="{'background': data.theme.btnColour, 'color': data.theme.btnFontColour}"
+              [disabled]="!templateCheck || !conCheck" [routerLink]="['/features', 'Step']">ตกลง</button>
+    </div>
+  </div>
+
