@@ -25,7 +25,7 @@
     "@ng-select/ng-select": "^3.7.1",
     "bootstrap": "^4.4.1",
     "chart.js": "^2.9.3",
-    "moment": "^2.24.0",
+    "moment": "^2.29.2",
     "ng-otp-input": "^1.7.0",
     "ng2-pdf-viewer": "^6.0.2",
     "ngx-bootstrap": "^5.2.0",
